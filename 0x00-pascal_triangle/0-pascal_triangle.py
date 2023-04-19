@@ -5,6 +5,9 @@
 
 
 def pascal_triangle(n):
+    """
+    Returns a triangle
+    """
     if n <= 0:
         return []
     triangle = [[1]]
