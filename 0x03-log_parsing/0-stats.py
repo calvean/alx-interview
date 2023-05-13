@@ -45,6 +45,7 @@ def parse_log_line(
 
 
 if __name__ == "__main__":
+    """ Log Parsing module """
     status_codes = {
       200: 0,
       301: 0,
