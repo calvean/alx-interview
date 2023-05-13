@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Log parsing """
+""" Module for Log parsing """
 import sys
 from typing import Dict, List
 
