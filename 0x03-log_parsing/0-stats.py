@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """ Reads stdin line by line and computes metrics """
 import sys
-from typing import Dict, List
 
 
-def print_file_stats(file_size: int, status_codes: Dict[int, int]) -> None:
+def print_file_stats(file_size, status_codes):
     """
     Function to print file size and stats every 10 loops
     Args:
@@ -20,10 +19,7 @@ def print_file_stats(file_size: int, status_codes: Dict[int, int]) -> None:
             print('{}: {}'.format(code, status_codes[code]))
 
 
-def parse_log_line(
-  line: str,
-  file_size: List[int],
-  status_codes: Dict[int, int]) -> None:
+def parse_log_line(line, file_size, status_codes):
     """
     Function to parse a single line of log file
     Args:
