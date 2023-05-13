@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" minOperations module """
+""" 0-minoperations module """
 
 
 def minOperations(n: int) -> int:
