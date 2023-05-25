@@ -6,9 +6,9 @@ def validUTF8(data):
     """ method that determines if a given data set
     represents a valid UTF-8 encoding
     Args:
-        data - data to be valdated
+        data (list): data to be valdated
     Return:
-        number of bytes or false if invlid
+        bool: True if valid, false if invlid
     """
     num_bytes = 0
 

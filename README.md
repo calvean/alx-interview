@@ -35,6 +35,14 @@ This directory contains files that parse and analyze log files. The files are:
 *    `0-stats.py`: a Python script that reads a log file and prints several statistics, such as the total file size and the number of status codes in the log file
 *    `README.md`: a readme file that explains the purpose of the directory and its contents
 
+## 0x04-utf8_validation/
+
+This directory contains files that checks if given data set is a valid UTF-8 encoding. The files are:
+
+*    `0-validate_utf8.py`: a Python script that determines if a given data set represents a valid UTF-8 encoding
+*    `0-main.py`: test file
+*    `README.md`: a readme file that explains the purpose of the directory and its contents
+
 ## Author
 
 Calvin Sharara - [Github](https://github.com/calvean)
