@@ -46,50 +46,44 @@ def solve_nqueens(N):
                     queen[0] - row
                     ) == abs(queen[1] - col):
                 return False
-        
+
         return True
-    
+
     def backtrack(queens):
         """
         Recursive function to solve the N Queens problem.
-        
+
         Args:
-            queens (List[List[int]]): List of queen positions represented by [row, col].
+            queens: List of queen positions represented by [row, col].
         """
-        
+
         if len(queens) == N:
-            # All queens have been placed successfully, add the solution to the list
             solutions.append(queens.copy())
             return
-        
+
         for row in range(N):
             if is_safe(queens, row, len(queens)):
-                # Place a queen at the current position
                 queens.append([row, len(queens)])
-                
-                # Recursively solve for the next column
+
                 backtrack(queens)
-                
-                # Backtrack and remove the queen from the current position
                 queens.pop()
-    
+
     backtrack(queens)
-    
-    # Print the solutions
+
     for solution in solutions:
         print(solution)
-    
+
     return solutions
+
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
-    
+
     try:
         num_queens = int(sys.argv[1])
         solve_nqueens(num_queens)
     except ValueError:
         print("N must be a number")
         sys.exit(1)
-
