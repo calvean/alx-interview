@@ -30,5 +30,10 @@ function getCharacters (movieId) {
   });
 }
 
-// Usage example: Get characters from "Return of the Jedi" (Movie ID: 3)
-getCharacters(3);
+const movieId = process.argv[2];
+
+if (movieId) {
+  getCharacters(movieId);
+} else {
+  console.error('Please provide a Movie ID.');
+}
