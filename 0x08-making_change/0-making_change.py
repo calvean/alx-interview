@@ -24,14 +24,17 @@ def makeChange(coins, total):
         return 0
 
     """ Create array for coins needed for each amount """
-    dp = [float('inf')] * (total + 1)
+    coins.sort(reverse=True)
+
+    max_coins_needed = total + 1
+    dp = [max_coins_needed] * (total + 1)
     dp[0] = 0
 
     for coin in coins:
         for j in range(coin, total + 1):
             dp[j] = min(dp[j], dp[j - coin] + 1)
 
-    if dp[total] == float('inf'):
+    if dp[total] == max_coins_needed:
         return -1
     else:
         return dp[total]
