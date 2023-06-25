@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """ 0-island_perimeter module """
-from typing import List
 
 
-def island_perimeter(grid: List[List[int]]) -> int:
+def island_perimeter(grid) -> int:
     """
     Calculates the perimeter of the island described in the grid.
 
