@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+""" 0-prime_game module """
+
+
 def isWinner(x, nums):
     """
     Determine the winner of each game in a series of rounds.
