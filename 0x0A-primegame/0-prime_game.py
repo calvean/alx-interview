@@ -1,7 +1,3 @@
-#!/usr/bin/python3
-""" 0-prime_game module """
-
-
 def isWinner(x, nums):
     """
     Determine the winner of each game in a series of rounds.
@@ -11,10 +7,9 @@ def isWinner(x, nums):
         nums (list): An array of 'n' for each round.
 
     Returns:
-        str or None: The name of the player with the most wins
-                     Else None.
+        str or None: The name of the player with the most wins.
+                     Returns None if the winner cannot be determined.
     """
-
     def is_prime(num):
         """
         Check if a number is prime.
@@ -41,7 +36,6 @@ def isWinner(x, nums):
 
         Returns:
             int: The winner of the game (0 for Maria, 1 for Ben).
-
         """
         primes = [num for num in range(2, n + 1) if is_prime(num)]
         turn = 0
