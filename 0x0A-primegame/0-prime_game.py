@@ -4,7 +4,7 @@
 
 def isWinner(x, nums):
     """
-    Determine the winner of each game in a series of rounds.
+    Determines the winner of the Prime Game.
 
     Args:
         x (int): The number of rounds to be played.
@@ -14,73 +14,35 @@ def isWinner(x, nums):
         str or None: The name of the player with the most wins.
                      Returns None if the winner cannot be determined.
     """
-    def is_prime(num):
-        """
-        Check if a number is prime.
-
-        Args:
-            num (int): The number to be checked.
-
-        Returns:
-            bool: True if the number is prime, False otherwise.
-        """
-        if num < 2:
-            return False
-        for i in range(2, int(num ** 0.5) + 1):
-            if num % i == 0:
-                return False
-        return True
-
-    def play_game(n):
-        """
-        Simulate a single round of the game.
-
-        Args:
-            n (int): The value of 'n' for the current round.
-
-        Returns:
-            int: The winner of the game (0 for Maria, 1 for Ben).
-        """
-        if n < 2:
-            # If there are no prime numbers, the current player loses
-            return 1  # Ben wins
-
-        primes = [num for num in range(2, n + 1) if is_prime(num)]
-        turn = 0
-
-        while primes:
-            prime = primes[0]
-            if prime > n:
-                break
-            multiples = [num for num in range(
-              prime, n + 1) if num % prime == 0]
-            primes = [num for num in primes if num not in multiples]
-            turn = 1 - turn  # Switch the turn between players
-
-        # If there are no prime numbers left, the current player loses
-        if turn == 0:
-            return 1  # Ben wins
-        else:
-            return 0  # Maria wins
-
-    maria_wins = 0
-    ben_wins = 0
-
-    # Play each round and keep track of the winner
-    for n in nums:
-        try:
-            winner = play_game(n)
-            if winner == 0:
-                maria_wins += 1
-            elif winner == 1:
-                ben_wins += 1
-        except TypeError:
-            # Handle invalid inputs where n is not an integer
-            return None
-
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
-    else:
+    if not nums or x < 1:
         return None
+
+    n = max(nums)
+
+    # Sieve of Eratosthenes to efficiently generate prime numbers
+    sieve = [True for _ in range(max(n + 1, 2))]
+    for i in range(2, int(pow(n, 0.5)) + 1):
+        if not sieve[i]:
+            continue
+        for j in range(i * i, n + 1, i):
+            sieve[j] = False
+
+    sieve[0] = sieve[1] = False
+
+    # Pre-compute the cumulative count of prime numbers
+    c = 0
+    for i in range(len(sieve)):
+        if sieve[i]:
+            c += 1
+        sieve[i] = c
+
+    player1 = 0
+    for n in nums:
+        player1 += sieve[n] % 2 == 1
+
+    # Determine the winner based on the count of wins for player 1
+    if player1 * 2 == len(nums):
+        return None
+    if player1 * 2 > len(nums):
+        return "Maria"
+    return "Ben"
