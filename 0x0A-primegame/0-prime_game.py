@@ -41,6 +41,10 @@ def isWinner(x, nums):
         Returns:
             int: The winner of the game (0 for Maria, 1 for Ben).
         """
+        if n < 2:
+            # If there are no prime numbers, the current player loses
+            return 1  # Ben wins
+
         primes = [num for num in range(2, n + 1) if is_prime(num)]
         turn = 0
 
@@ -51,24 +55,28 @@ def isWinner(x, nums):
             multiples = [num for num in range(
               prime, n + 1) if num % prime == 0]
             primes = [num for num in primes if num not in multiples]
-            turn = 1 - turn
+            turn = 1 - turn  # Switch the turn between players
 
-        """ If there are no prime numbers left, the current player loses """
+        # If there are no prime numbers left, the current player loses
         if turn == 0:
-            return 1
+            return 1  # Ben wins
         else:
-            return 0
+            return 0  # Maria wins
 
     maria_wins = 0
     ben_wins = 0
 
-    """ Play each round and keep track of the winner """
+    # Play each round and keep track of the winner
     for n in nums:
-        winner = play_game(n)
-        if winner == 0:
-            maria_wins += 1
-        elif winner == 1:
-            ben_wins += 1
+        try:
+            winner = play_game(n)
+            if winner == 0:
+                maria_wins += 1
+            elif winner == 1:
+                ben_wins += 1
+        except TypeError:
+            # Handle invalid inputs where n is not an integer
+            return None
 
     if maria_wins > ben_wins:
         return "Maria"
