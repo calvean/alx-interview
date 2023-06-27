@@ -45,16 +45,19 @@ def isWinner(x, nums):
         turn = 0
 
         while primes:
-            if turn == 0:
-                prime = primes[0]
-                primes = [num for num in primes if num % prime != 0]
-                turn = 1
-            else:
-                prime = primes[0]
-                primes = [num for num in primes if num % prime != 0]
-                turn = 0
+            prime = primes[0]
+            if prime > n:
+                break
+            multiples = [num for num in range(
+              prime, n + 1) if num % prime == 0]
+            primes = [num for num in primes if num not in multiples]
+            turn = 1 - turn
 
-        return 1 - turn
+        """ If there are no prime numbers left, the current player loses """
+        if turn == 0:
+            return 1
+        else:
+            return 0
 
     maria_wins = 0
     ben_wins = 0
