@@ -19,27 +19,14 @@ def makeChange(coins, total):
 
     """
 
-    memo = {}
+    if total <= 0:
+        return 0
 
-    def makeChangeHelper(remaining):
-        """  Dictionary to store previously calculated results """
-        if remaining in memo:
-            return memo[remaining]
+    min_coins = [float('inf')] * (total + 1)
+    min_coins[0] = 0
 
-        if remaining == 0:
-            return 0
+    for coin in coins:
+        for i in range(coin, total + 1):
+            min_coins[i] = min(min_coins[i], min_coins[i - coin] + 1)
 
-        if remaining < 0:
-            return -1
-
-        min_coins = float('inf')
-
-        for coin in coins:
-            result = makeChangeHelper(remaining - coin)
-            if result >= 0 and result < min_coins:
-                min_coins = result + 1
-
-        memo[remaining] = -1 if min_coins == float('inf') else min_coins
-        return memo[remaining]
-
-    return makeChangeHelper(total)
+    return min_coins[total] if min_coins[total] != float('inf') else -1
